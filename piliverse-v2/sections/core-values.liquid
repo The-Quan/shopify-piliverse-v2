@@ -1,0 +1,307 @@
+{% assign gen_id = section.id | replace: '_', '' | downcase %}
+
+{% style %}
+        /* ================= SECTION WRAPPER ================= */
+        .core-values-section-{{ gen_id }} {
+          width: 100%;
+          position: relative;
+          background: #020313;
+        }
+
+        .core-values-wrapper-{{ gen_id }} {
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* ================= TOP IMAGE (GIỐNG WHY-CHOOSE) ================= */
+        .core-values-bg-image-{{ gen_id }} {
+          width: 100%;
+          height: 520px;
+          border-radius: 40px;
+          overflow: hidden;
+          position: relative;
+          z-index: 1;
+
+          opacity: 0;
+          transform: translateY(140px);
+          transition:
+            opacity 2s cubic-bezier(.22,1,.36,1),
+            transform 2s cubic-bezier(.22,1,.36,1);
+        }
+
+        .core-values-bg-image-{{ gen_id }}.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .core-values-bg-image-{{ gen_id }} img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        /* ================= CONTENT OVERLAP ================= */
+        .core-values-middle-{{ gen_id }} {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+          pointer-events: none;
+          margin-top: -360px;
+        }
+
+        .core-values-content-{{ gen_id }} {
+          pointer-events: auto;
+          max-width: 1100px;
+          width: 100%;
+          padding: 160px 16px 140px;
+          text-align: center;
+        }
+
+        /* ================= TITLE ================= */
+        .core-values-title-{{ gen_id }} {
+          font-size: 48px;
+          font-weight: 500;
+          margin-bottom: 96px;
+          background: radial-gradient(50% 100%, #fff 30%, rgba(255,255,255,.5));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          opacity: 0;
+          transform: translateY(60px);
+          transition:
+            opacity 1.3s cubic-bezier(.22,1,.36,1),
+            transform 1.3s cubic-bezier(.22,1,.36,1);
+        }
+
+        .core-values-title-{{ gen_id }}.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ================= GRID ================= */
+        .core-values-grid-{{ gen_id }} {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 48px;
+        }
+
+        .core-value-item-{{ gen_id }} {
+          opacity: 0;
+          transform: translateY(40px);
+          transition:
+            opacity 1.1s cubic-bezier(.22,1,.36,1),
+            transform 1.1s cubic-bezier(.22,1,.36,1);
+        }
+
+        .core-value-item-{{ gen_id }}.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+      .core-value-icon-{{ gen_id }} {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .core-value-item-{{ gen_id }} {
+      text-align: center;
+    }
+
+        .core-value-icon-{{ gen_id }} img {
+          width: 74px;
+          height: 74px;
+        }
+
+        .core-value-title-{{ gen_id }} {
+          font-size: 18px;
+          font-weight: 500;
+          color: #fff;
+          margin-bottom: 12px;
+        }
+
+        .core-value-desc-{{ gen_id }} {
+          font-size: 14px;
+          line-height: 22px;
+          color: #DFE1F4;
+        }
+
+        /* ================= MOBILE ================= */
+        @media (max-width: 768px) {
+    .core-values-bg-image-{{ gen_id }} {
+      height: 320px;
+      border-radius: 32px;
+    }
+
+    .core-values-middle-{{ gen_id }} {
+      margin-top: -220px;
+    }
+
+    .core-values-content-{{ gen_id }} {
+      padding: 120px 16px;
+    }
+
+    .core-values-title-{{ gen_id }} {
+      font-size: 32px;
+      margin-bottom: 64px;
+    }
+
+    .core-values-grid-{{ gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+
+    .core-value-item-{{ gen_id }} {
+      text-align: center;
+    }
+
+    .core-value-icon-{{ gen_id }} {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .core-value-icon-{{ gen_id }} img {
+      width: 96px;
+      height: 96px;
+    }
+
+    .core-value-title-{{ gen_id }} {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .core-value-desc-{{ gen_id }} {
+      max-width: 280px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 22px;
+      color: #DFE1F4;
+    }
+  }
+{% endstyle %}
+
+<section class="core-values-section-{{ gen_id }}">
+  <div class="core-values-wrapper-{{ gen_id }}">
+    {% if section.settings.top_image %}
+      <div class="core-values-bg-image-{{ gen_id }}">
+        {{ section.settings.top_image | image_url: width: 2400 | image_tag }}
+      </div>
+    {% endif %}
+
+    <div class="core-values-middle-{{ gen_id }}">
+      <div class="core-values-content-{{ gen_id }}">
+        <h2 class="core-values-title-{{ gen_id }}">
+          {{ section.settings.title }}
+        </h2>
+
+        <div class="core-values-grid-{{ gen_id }}">
+          {% for block in section.blocks %}
+            <div
+              class="core-value-item-{{ gen_id }}"
+              data-delay="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="core-value-icon-{{ gen_id }}">
+                {{ block.settings.icon | image_url: width: 120 | image_tag }}
+              </div>
+
+              <div class="core-value-title-{{ gen_id }}">
+                {{ block.settings.item_title }}
+              </div>
+
+              <div class="core-value-desc-{{ gen_id }}">
+                {{ block.settings.item_description }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const section = document.querySelector('.core-values-section-{{ gen_id }}');
+    if (!section) return;
+
+    const bg = section.querySelector('.core-values-bg-image-{{ gen_id }}');
+    const title = section.querySelector('.core-values-title-{{ gen_id }}');
+    const items = section.querySelectorAll('.core-value-item-{{ gen_id }}');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    bg && observer.observe(bg);
+    title && observer.observe(title);
+
+    items.forEach((item) => {
+      const delay = parseInt(item.dataset.delay || 0, 10) * 160;
+      observer.observe(item);
+      item.style.transitionDelay = delay + 'ms';
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Core Values",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "top_image",
+      "label": "Top background image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Core Value"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Core Value",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Core Values",
+      "blocks": [{ "type": "value" }, { "type": "value" }, { "type": "value" }, { "type": "value" }]
+    }
+  ]
+}
+{% endschema %}

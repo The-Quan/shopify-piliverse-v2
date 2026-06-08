@@ -1,0 +1,390 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "content": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 12,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "facebook_ad_account_hero_GgWdz9": {
+      "type": "facebook-ad-account-hero",
+      "name": "Facebook Ad Account Hero",
+      "settings": {
+        "gradient_image": "shopify://shop_images/section1Bg_768166b5-9728-42d9-aa85-ea4027ac113d.png",
+        "badge": "Service",
+        "heading": "Facebook Agency Ads Accounts For Rent",
+        "description": "Pili Verse offers ad account rental services at the most competitive prices on the market. We accept ALL INDUSTRIES, whether your products fully comply with advertising policies or are among the most challenging for Facebook to approve.",
+        "button_label": "Talk to expert",
+        "button_link": ""
+      }
+    },
+    "core_services_TahxAR": {
+      "type": "core-services",
+      "blocks": {
+        "icon_eU7KNJ": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/facebookLogo.webp"
+          }
+        },
+        "icon_3tHP9c": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/shopifyLogo.webp"
+          }
+        },
+        "icon_gVtjfi": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/tiktokLogo.webp"
+          }
+        },
+        "icon_WF4Cdh": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/blogLogo.webp"
+          }
+        },
+        "icon_bcCwLq": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/googleLogo.webp"
+          }
+        },
+        "icon_gP6raR": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/azureLogo.webp"
+          }
+        },
+        "service_tTw77t": {
+          "type": "service",
+          "settings": {
+            "title": "Limited Budget from the Start",
+            "desc": "New accounts often come with very low spending limits (as little as $5), making it difficult to adjust budgets flexibly and scale your campaigns."
+          }
+        },
+        "service_m6xHe6": {
+          "type": "service",
+          "settings": {
+            "title": "Ad Funds Held Up",
+            "desc": "To prevent fraudulent activities, Facebook temporarily holds a portion of your funds before campaigns launch, putting a strain on your finances and disrupting business plans."
+          }
+        },
+        "service_reNUjx": {
+          "type": "service",
+          "settings": {
+            "title": "Essential for Swift Ad Approvals",
+            "desc": "Whitelisted accounts enjoy quicker ad approvals, ensuring your campaigns reach audiences faster. Without this priority, delays can significantly affect performance."
+          }
+        },
+        "service_KVCCWV": {
+          "type": "service",
+          "settings": {
+            "title": "High Risk of Account Deactivation",
+            "desc": "As the number of accounts soars, Facebook’s stricter oversight increases the likelihood of unexpected deactivations."
+          }
+        },
+        "service_fU4nH6": {
+          "type": "service",
+          "settings": {
+            "title": "Need for Multiple Accounts in Large Enterprises",
+            "desc": "Large-scale campaigns require a multitude of stable accounts. Managing and maintaining many accounts can be a daunting task for growing businesses."
+          }
+        },
+        "service_3trBfA": {
+          "type": "service",
+          "settings": {
+            "title": "Payment Processing Hurdles",
+            "desc": "Issuing payment cards can take 5-10 days, and if an account is deactivated, rebuilding the payment system further delays operations—when time is money, these setbacks add up."
+          }
+        }
+      },
+      "block_order": [
+        "icon_eU7KNJ",
+        "icon_3tHP9c",
+        "icon_gVtjfi",
+        "icon_WF4Cdh",
+        "icon_bcCwLq",
+        "icon_gP6raR",
+        "service_tTw77t",
+        "service_m6xHe6",
+        "service_reNUjx",
+        "service_KVCCWV",
+        "service_fU4nH6",
+        "service_3trBfA"
+      ],
+      "name": "Core Services",
+      "settings": {
+        "title": "Why should you rent a Facebook ad account?",
+        "subtitle": "Why do so many of our customers choose to rent an ad account instead of creating one themselves, even though setting one up is quite simple? Join PiLi Verse as we explore the reasons behind this choice."
+      }
+    },
+    "core_services_XpprfL": {
+      "type": "core-services",
+      "blocks": {
+        "icon_MheKRB": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/facebookLogo.webp"
+          }
+        },
+        "icon_7nJWBY": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/shopifyLogo.webp"
+          }
+        },
+        "icon_8JTF7U": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/tiktokLogo.webp"
+          }
+        },
+        "icon_dVQ89M": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/blogLogo.webp"
+          }
+        },
+        "icon_mdfagF": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/googleLogo.webp"
+          }
+        },
+        "icon_AwamTi": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify://shop_images/azureLogo.webp"
+          }
+        },
+        "service_arYwqa": {
+          "type": "service",
+          "settings": {
+            "title": "Unlimited Account Quantity",
+            "desc": "PiLi Verse imposes no limit on how many ad accounts you can rent."
+          }
+        },
+        "service_TJfKXP": {
+          "type": "service",
+          "settings": {
+            "title": "Fully Verified Accounts",
+            "desc": "Whitelisted accounts ready for any sector you wish to target."
+          }
+        },
+        "service_fiCJnp": {
+          "type": "service",
+          "settings": {
+            "title": "No Content Approval Needed",
+            "desc": "Take full control of your content, cutting setup time by up to 90%."
+          }
+        },
+        "service_7jFtQj": {
+          "type": "service",
+          "settings": {
+            "title": "Free Account Setup",
+            "desc": "At PiLi Verse, there’s absolutely no fee for opening accounts."
+          }
+        },
+        "service_amhemg": {
+          "type": "service",
+          "settings": {
+            "title": "Flexible Rental Fees",
+            "desc": "Enjoy market-low rates—starting at just 2.5%."
+          }
+        },
+        "service_EaYYXk": {
+          "type": "service",
+          "settings": {
+            "title": "High Spending Limits",
+            "desc": "No budget cap, letting you scale your campaigns freely."
+          }
+        }
+      },
+      "block_order": [
+        "icon_MheKRB",
+        "icon_7nJWBY",
+        "icon_8JTF7U",
+        "icon_dVQ89M",
+        "icon_mdfagF",
+        "icon_AwamTi",
+        "service_arYwqa",
+        "service_TJfKXP",
+        "service_fiCJnp",
+        "service_7jFtQj",
+        "service_amhemg",
+        "service_EaYYXk"
+      ],
+      "name": "Core Services",
+      "settings": {
+        "title": "Why choose PiLi Verse for account rental?",
+        "subtitle": "You have a quality product, compelling ads, and a thorough marketing plan. Yet, when your ad accounts are deactivated or restricted, everything can grind to a halt. Understanding this, PiLi Verse provides a Facebook Whitelist ad account rental solution with standout advantages."
+      }
+    },
+    "image_divider_qjM6Xw": {
+      "type": "image-divider",
+      "name": "Image Divider",
+      "settings": {
+        "image": "shopify://shop_images/linearLine_8b2809a8-38be-4e6a-963c-d9356606ca03.webp",
+        "background": "#010314",
+        "image_width": 100
+      }
+    },
+    "service_fee_table_zVGMgC": {
+      "type": "service-fee-table",
+      "blocks": {
+        "row_waVUiz": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        },
+        "row_7MQTra": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        },
+        "row_kTkhMX": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        },
+        "row_cCVHdN": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        },
+        "row_pYeHzA": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        },
+        "row_mXMxUh": {
+          "type": "row",
+          "settings": {
+            "vnd_range": "0 – 5 Million VND/Day",
+            "vnd_fee": "7%",
+            "usd_range": "0 – 250$/Day",
+            "usd_fee": "8%"
+          }
+        }
+      },
+      "block_order": [
+        "row_waVUiz",
+        "row_7MQTra",
+        "row_kTkhMX",
+        "row_cCVHdN",
+        "row_pYeHzA",
+        "row_mXMxUh"
+      ],
+      "name": "Service Fee Table",
+      "settings": {
+        "title": "Our Service Fee Table",
+        "subtitle": "At Pili Verse, we prioritize reliability, security, and customer satisfaction above all else. Our verified ad accounts help minimize risks, while our support team is available 24/7 to assist you in optimizing your advertising budget and reaching the right audience.",
+        "gradient_image": "shopify://shop_images/gradientTop_694caada-4f1c-4bbb-b066-d564b3f23afe.png"
+      }
+    },
+    "faq_accordion_fHrVip": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_DQzKxh": {
+          "type": "faq",
+          "settings": {
+            "question": "How is the service fee for my account calculated?",
+            "answer": "PiLi Verse applies a daily fee based on your actual ad spend."
+          }
+        },
+        "faq_3zeVbf": {
+          "type": "faq",
+          "settings": {
+            "question": "How many accounts can I rent simultaneously?",
+            "answer": "Initially, you can rent at least two accounts. As your daily budget increases, PiLi Verse will provide additional accounts."
+          }
+        },
+        "faq_LxJ6iR": {
+          "type": "faq",
+          "settings": {
+            "question": "What happens if my ad account is deactivated?",
+            "answer": "PiLi Verse will investigate the issue and file an appeal. If the account isn’t reinstated within a day, we’ll provide a replacement."
+          }
+        },
+        "faq_M3Tn4F": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I receive my ad account?",
+            "answer": "We grant access via PiLi Verse’s BM. Simply log in and start your campaign."
+          }
+        },
+        "faq_cxdzRV": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use my own payment card?",
+            "answer": "For security reasons, only the payment cards pre-approved by PiLi Verse are used in our ad accounts."
+          }
+        },
+        "faq_npMatk": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I pay for the ad budget and fees?",
+            "answer": "Just transfer funds to the account PiLi Verse provides, including your unique customer reference in the payment note."
+          }
+        }
+      },
+      "block_order": [
+        "faq_DQzKxh",
+        "faq_3zeVbf",
+        "faq_LxJ6iR",
+        "faq_M3Tn4F",
+        "faq_cxdzRV",
+        "faq_npMatk"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "title": "Frequently Asked Questions"
+      }
+    }
+  },
+  "order": [
+    "content",
+    "facebook_ad_account_hero_GgWdz9",
+    "core_services_TahxAR",
+    "core_services_XpprfL",
+    "image_divider_qjM6Xw",
+    "service_fee_table_zVGMgC",
+    "faq_accordion_fHrVip"
+  ]
+}

@@ -1,0 +1,398 @@
+<script
+  src="{{ 'blog-posts-list.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<blog-posts-list section-id="{{ section.id }}" class="blog-posts-list--default">
+  <div class="blog-posts blog-posts--dark">
+    {%- paginate blog.articles by 13 -%}
+      <!-- ================= HERO (PAGE 1 ONLY) ================= -->
+      {%- if paginate.current_page == 1 -%}
+        {% assign featured_article = blog.articles.first %}
+        {% if featured_article %}
+          <section class="blog-hero">
+            <div class="blog-hero__content">
+              <span class="blog-hero__date">
+                {{ featured_article.published_at | time_tag: format: 'date' }}
+              </span>
+
+              <h1 class="blog-hero__title">
+                {{ featured_article.title }}
+              </h1>
+
+              <p class="blog-hero__excerpt">
+                {{ featured_article.excerpt_or_content | strip_html | truncate: 180 }}
+              </p>
+
+              <a class="blog-hero__cta" href="{{ featured_article.url }}">
+                {{ 'content.read_more' | t | default: 'Read more' }}
+                <span class="cta-arrow">→</span>
+              </a>
+            </div>
+
+            {% if featured_article.image %}
+              <div class="blog-hero__image">
+                {{ featured_article.image | image_url: width: 1800 | image_tag }}
+              </div>
+            {% endif %}
+          </section>
+        {% endif %}
+      {%- endif -%}
+
+      <!-- ================= BLOG GRID ================= -->
+      <div class="blog-posts-container blog-posts-container--grid">
+        {% for article in blog.articles %}
+          {% if paginate.current_page == 1 and forloop.first %}
+            {% continue %}
+          {% endif %}
+
+          <div class="blog-card">
+            {% if article.image %}
+              <a class="blog-card__image-link" href="{{ article.url }}">
+                {{ article.image | image_url: width: 900 | image_tag: loading: 'lazy' }}
+              </a>
+            {% endif %}
+
+            <div class="blog-card__body">
+              <div class="blog-card__date">
+                {{ article.published_at | time_tag: format: 'date' }}
+              </div>
+
+              <a class="blog-card__title" href="{{ article.url }}">
+                {{ article.title }}
+              </a>
+
+              <p class="blog-card__excerpt">
+                {{ article.excerpt_or_content | strip_html | truncate: 140 }}
+              </p>
+
+              <a class="blog-card__cta" href="{{ article.url }}">
+                {{ 'content.read_more' | t | default: 'Read more' }}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- ================= PAGINATION ================= -->
+      {% if paginate.pages > 1 %}
+        <nav class="blog-pagination">
+          {% if paginate.previous %}
+            <a class="page-btn prev" href="{{ paginate.previous.url }}">← Prev</a>
+          {% endif %}
+
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <a class="page-btn" href="{{ part.url }}">{{ part.title }}</a>
+            {% else %}
+              <span class="page-btn active">{{ part.title }}</span>
+            {% endif %}
+          {% endfor %}
+
+          {% if paginate.next %}
+            <a class="page-btn next" href="{{ paginate.next.url }}">Next →</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    {%- endpaginate -%}
+  </div>
+</blog-posts-list>
+
+{% stylesheet %}
+      /*
+
+       =================================================
+       BLOG – HERO + GRID (PiliVerse Style)
+       =================================================
+    */
+
+    .blog-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 64px;
+  }
+
+  .page-btn {
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-decoration: none;
+  }
+
+  .page-btn.active {
+    background: white;
+    color: #010314;
+  }
+
+  .page-btn:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+
+      .blog-posts-list--default {
+        background: #010314;
+      }
+
+      /* ===== WRAPPER ===== */
+      .blog-posts {
+        background: #010314;
+        padding: 96px 16px 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 96px;
+      }
+
+      /* ===== HERO ===== */
+      .blog-hero {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-top: 80px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+
+      .blog-hero__content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .blog-hero__date {
+        display: inline-block;
+        width: fit-content;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .blog-hero__title {
+        font-size: clamp(36px, 5vw, 52px);
+        line-height: 1.15;
+        font-weight: 500;
+        letter-spacing: 0.003em;
+
+        background: radial-gradient(60% 100% at 50% 50%, #ffffff 30%, rgba(255, 255, 255, 0.55) 100%);
+
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        cursor: default;
+      }
+
+
+      .blog-hero__excerpt {
+        font-size: 18px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 560px;
+      }
+
+      .blog-hero__cta {
+        margin-top: 8px;
+        width: fit-content;
+        padding: 12px 22px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #010314;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: transform 0.25s ease
+        , box-shadow 0.25s ease;
+      }
+      .blog-hero__cta .cta-arrow {
+        transition: transform 0.25s ease;
+      }
+
+      .blog-hero__cta:hover .cta-arrow {
+        transform: translateX(4px);
+      }
+      .blog-hero__cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ===== HERO IMAGE ===== */
+      .blog-hero__image img {
+        width: 100%;
+        height: 360px;
+        object-fit: cover;
+        border-radius: 28px;
+      }
+
+      /* ===== GRID ===== */
+      .blog-posts-container--grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        border-radius: 30px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      /* ===== CARD ===== */
+      .blog-card {
+        background: #151b2e;
+        border-radius: 24px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s ease
+        , box-shadow 0.25s ease;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .blog-card__image-link img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .blog-card__body {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex-grow: 1;
+      }
+
+      .blog-card__date {
+        font-size: 12px;
+        color: #5c7cfa;
+      }
+
+      .blog-card__title {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: #e6eded;
+        text-decoration: none;
+      }
+
+      .blog-card__excerpt {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #a7acc2;
+        flex-grow: 1;
+      }
+
+      .blog-card__cta {
+        margin-top: 12px;
+        width: fit-content;
+        padding: 8px 16px;
+        font-size: 13px;
+        color: white;
+        background: transparent;
+        text-decoration: none;
+        border: thin solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+      }
+
+      .blog-card__cta:hover {
+        background: #e6e8f2;
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      @media (max-width: 1024px) {
+        .blog-posts-container--grid {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 0;
+        }
+        .blog-hero {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding-top: 64px;
+        }
+
+        .blog-hero__image img {
+          height: 300px;
+        }
+
+        .blog-posts-container--grid {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 32px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .blog-posts-container--grid {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 0;
+        }
+        .blog-posts {
+          padding: 64px 16px 96px;
+          gap: 64px;
+        }
+
+        .blog-hero__title {
+          font-size: 32px;
+        }
+
+        .blog-hero__excerpt {
+          font-size: 18px;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.85);
+          max-width: 560px;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+
+        .blog-hero__image img {
+          height: 220px;
+          border-radius: 20px;
+        }
+
+        .blog-posts-container--grid {
+          grid-template-columns: 1fr;
+          border-radius: 24px;
+        }
+
+        .blog-card__body {
+          padding: 16px;
+        }
+      }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Blog Hero Grid",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Title text"
+        }
+      ]
+    }
+  ],
+  "settings": []
+}
+{% endschema %}

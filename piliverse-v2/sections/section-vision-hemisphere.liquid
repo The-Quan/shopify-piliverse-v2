@@ -1,0 +1,440 @@
+<section class="vision-section">
+  {% if section.settings.bg_top != blank %}
+    <div class="vision-bg vision-bg--top">
+      <img
+        src="{{ section.settings.bg_top | image_url: width: 2000 }}"
+        alt=""
+        loading="lazy">
+    </div>
+  {% endif %}
+
+  {% if section.settings.bg_bottom != blank %}
+    <div class="vision-bg vision-bg--bottom">
+      <img
+        src="{{ section.settings.bg_bottom | image_url: width: 2000 }}"
+        alt=""
+        loading="lazy">
+    </div>
+  {% endif %}
+
+  <div class="vision-layer">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'title' %}
+          <h2 class="vision-title">
+            <span class="vision-title-inner">{{ block.settings.heading }}</span>
+          </h2>
+
+
+        {% when 'logo' %}
+          <div class="vision-logo">
+            <img src="{{ block.settings.logo | image_url: width: 200 }}" alt="">
+          </div>
+        {% when 'desc' %}
+          <p class="vision-desc">
+            <span class="vision-desc-inner">{{ block.settings.text }}</span>
+          </p>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+
+
+  /*
+
+   ===================================================== 
+   BASE 
+   ===================================================== 
+*/
+  .vision-section {
+    position: relative;
+    min-height: 100vh;
+    background: #010314;
+    overflow: hidden;
+  }
+
+  .vision-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .vision-bg img {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: none;
+    opacity: 0.85;
+  }
+
+
+  /*
+
+   ===================================================== 
+   BACKGROUND POSITIONS (DESKTOP) 
+   ===================================================== 
+*/
+  :root {
+    --curve-top: 78%;
+    /* viền dưới ảnh trên */
+    --curve-bottom: 32%;
+    /* viền trên ảnh dưới */
+  }
+
+  .vision-bg--top img {
+    width: 60vw;
+    max-width: 900px;
+    bottom: var(--curve-top);
+  }
+
+  .vision-bg--bottom img {
+    width: 70vw;
+    max-width: 1100px;
+    top: var(--curve-bottom);
+  }
+
+
+  /*
+
+   ===================================================== 
+   CONTENT LAYER 
+   ===================================================== 
+*/
+  .vision-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+
+
+  /*
+
+   ===================================================== 
+   TITLE – NẰM TRONG ẢNH TRÊN 
+   ===================================================== 
+*/
+  .vision-title {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--curve-top) + 28px);
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 600;
+    text-align: center;
+  }
+
+
+  /*
+
+   ===================================================== 
+   LOGO – CHÍNH GIỮA 2 VIỀN (CHUẨN HÌNH HỌC) 
+   ===================================================== 
+*/
+
+
+  /*
+
+   ================================ 
+   VÙNG GIỮA 2 ẢNH (CHUẨN – KHÔNG NHẢY) 
+   ================================ 
+*/.vision-logo {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--curve-bottom) - 5%);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+
+  .vision-logo img {
+    height: clamp(28px, 4vw, 44px);
+    width: auto;
+  }
+
+
+  /*
+
+   ===================================================== 
+   DESCRIPTION – TRONG ẢNH DƯỚI 
+   ===================================================== 
+*/
+  .vision-middle {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .vision-desc-inner {
+    display: inline-block;
+
+    background: radial-gradient(50% 100% at 50% 50%, #ffffff 35%, rgba(255, 255, 255, 0.5) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  .vision-desc {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--curve-bottom) + 96px);
+    transform: translateX(-50%);
+    max-width: 640px;
+    text-align: center;
+
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.7;
+
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+  /*
+
+   ===================================================== 
+   TABLET 
+   ===================================================== 
+*/
+  @media (max-width: 991px) {
+    :root {
+      --curve-top: 70%;
+      --curve-bottom: 38%;
+    }
+
+
+    .vision-desc {
+      width: 90%;
+    }
+  }
+
+
+  /*
+
+   ===================================================== 
+   MOBILE 
+   ===================================================== 
+*/
+  @media (max-width: 767px) {
+    .vision-section {
+      min-height: 90vh;
+    }
+    :root {
+      --curve-top: 60%;
+      --curve-bottom: 45%;
+    }
+
+    .vision-logo img {
+      height: 32px;
+    }
+
+    .vision-bg--bottom img {
+      width: 120vw;
+    }
+    .vision-logo {
+      top: calc(var(--curve-bottom) - 2.5%);
+    }
+    .vision-title {
+      
+      font-size: 26px;
+      padding: 0 20px;
+    }
+
+    .vision-desc {
+      max-width: 95%;
+      /* ✅ ĐÚNG YÊU CẦU */
+      padding: 0 20px;
+      font-size: 14px;
+    }
+  }
+
+
+  /*
+
+   ===================================================== 
+   SMALL MOBILE 
+   ===================================================== 
+*/
+  @media (max-width: 480px) {
+    .vision-section {
+      min-height: 80vh;
+    }
+    .vision-bg--top img {
+      width: 130vw;
+    }
+    .vision-logo {
+      top: calc(var(--curve-bottom) - 2.5%);
+    }
+    .vision-bg--bottom img {
+      width: 140vw;
+    }
+  }
+
+  /* ================= VISION ANIMATION (FIXED) ================= */
+
+  /* ----- Layout gốc: KHÔNG ĐỘNG ----- */
+  .vision-title,
+  .vision-desc {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .vision-logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ----- Inner elements để animate ----- */
+  .vision-title-inner,
+  .vision-desc-inner {
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ----- PREPARE: trước khi animate ----- */
+  .js-animate .vision-section.is-prepare .vision-title-inner,
+  .js-animate .vision-section.is-prepare .vision-desc-inner {
+    visibility: hidden;
+    transform: translateY(40px);
+  }
+
+  .js-animate .vision-section.is-prepare .vision-logo {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+
+  /* ----- ANIMATE IN ----- */
+  .js-animate .vision-section.is-animate .vision-title-inner,
+  .js-animate .vision-section.is-animate .vision-desc-inner {
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 1.5s ease
+    , transform 1.5s ease;
+  }
+
+  /* delay cho desc */
+  .js-animate .vision-section.is-animate .vision-desc-inner {
+    transition-delay: 0.15s;
+  }
+
+  /* logo zoom */
+  .js-animate .vision-section.is-animate .vision-logo {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 1.2s ease
+    , transform 1.2s ease;
+  }
+
+
+</style>
+
+{% schema %}
+  {
+    "name": "Vision Glow Section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "bg_top",
+        "label": "Background Top Image"
+      }, {
+        "type": "image_picker",
+        "id": "bg_bottom",
+        "label": "Background Bottom Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo Image"
+          }
+        ]
+      }, {
+        "type": "title",
+        "name": "Title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Title",
+            "default": "Our Vision"
+          }
+        ]
+      }, {
+        "type": "desc",
+        "name": "Description",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Description"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Vision Glow Section",
+        "blocks": [
+          {
+            "type": "title"
+          }, {
+            "type": "logo"
+          }, {
+            "type": "desc"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const section = document.querySelector('.vision-section');
+  if (!section) return;
+  
+  document.documentElement.classList.add('js-animate');
+  
+  let lastScrollY = window.scrollY;
+  
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+      lastScrollY = currentScrollY;
+  
+      if (entry.isIntersecting) {
+        if (scrollingDown) {
+          // ⏬ từ trên xuống → animate
+          section.classList.remove('is-prepare');
+          section.classList.add('is-animate');
+        } else {
+          // ⏫ từ dưới lên → hiện ngay
+          section.classList.remove('is-prepare', 'is-animate');
+        }
+      } else {
+        // Ra khỏi viewport → reset để lần sau animate lại
+        section.classList.remove('is-animate');
+        section.classList.add('is-prepare');
+      }
+    },
+    { threshold: 0.35 }
+  );
+  
+  // trạng thái ban đầu
+  section.classList.add('is-prepare');
+  observer.observe(section);
+  });
+</script>

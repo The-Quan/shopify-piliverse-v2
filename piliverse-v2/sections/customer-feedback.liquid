@@ -1,0 +1,341 @@
+<div class="customer-feedback">
+  <div class="customer-feedback-container">
+
+    {% if section.settings.feedback_heading != blank %}
+      <h2 class="feedback-heading fade-up">
+        {{ section.settings.feedback_heading }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.feedback_description != blank %}
+      <p class="feedback-description fade-up">
+        {{ section.settings.feedback_description }}
+      </p>
+    {% endif %}
+
+    <div class="swiper feedback-swiper ">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks limit: 4 %}
+          <div class=""></div>
+          <div class="feedback-card swiper-slide fade-up">
+
+            <div class="feedback-logo">
+              {% if block.settings.logo != blank %}
+                {{ block.settings.logo
+ | image_url: width: 400
+ | image_tag
+                }}
+              {% endif %}
+            </div>
+
+            <div class="feedback-content">
+              <p class="feedback-text">
+                {{ block.settings.content | truncate: 200 }}
+              </p>
+
+              <p class="feedback-author">
+                {{ block.settings.author }}
+              </p>
+
+              <span class="feedback-role">
+                {{ block.settings.role }}
+              </span>
+            </div>
+
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+
+  .customer-feedback {
+    width: 100%;
+    height: auto;
+    background: #020414;
+  }
+
+  .customer-feedback-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+
+  .feedback-heading {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 42px;
+    line-height: 1.4;
+  }
+
+  .feedback-description {
+    color: white;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 16px;
+  }
+
+
+  .feedback-card {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 20px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+  }
+
+
+  .feedback-logo {
+    width: 290px;
+    height: 250px;
+    flex-shrink: 0;
+  }
+
+  .feedback-logo img {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .feedback-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feedback-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .feedback-author {
+    height: 10%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .feedback-role {
+    font-size: 14px;
+    color: #777;
+  }
+
+
+  @media(max-width: 1024px) {
+
+    .feedback-heading {
+      font-size: 26px;
+    }
+
+  }
+
+
+  @media(max-width: 768px) {
+    .customer-feedback {
+      padding: 0 20px;
+    }
+
+    .feedback-card {
+      display: flex !important;
+      flex-direction: column !important;
+      height: 420px !important;
+      gap: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .feedback-logo {
+      width: 100%;
+      height: 200px;
+    }
+
+    .feedback-heading {
+      font-size: 22px;
+    }
+
+    .feedback-text {
+      font-size: 12px;
+    }
+    .feedback-author {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .feedback-role {
+      font-size: 12px;
+    }
+
+
+  }
+
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 0.8s ease
+    , transform 0.8s ease;
+  }
+
+  .fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feedback-card:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  .feedback-card:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  .feedback-card:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  .feedback-card:nth-child(4) {
+    transition-delay: 0.4s;
+  }
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+  
+  const items = document.querySelectorAll(".fade-up");
+  
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  },{
+    threshold:0.2
+  });
+  
+  items.forEach(item=>{
+    observer.observe(item);
+  });
+  
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+  
+  const swiper = new Swiper(".feedback-swiper", {
+    
+    slidesPerView: 2,
+    spaceBetween: 15,
+    loop: true,
+
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: false
+      },
+
+
+    
+    grid:{
+  rows:2,
+  fill:"row"
+  },
+  
+  
+    pagination: {
+      el: ".swiper-pagination",
+      clickable:true
+    },
+  
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+  
+    breakpoints: {
+  
+      0:{
+  slidesPerView:1.25,
+  grid:{
+  rows:1
+  }
+  },
+  
+  640:{
+  slidesPerView:2,
+  grid:{
+  rows:1
+  }
+  },
+  
+  992:{
+  slidesPerView:2,
+  grid:{
+  rows:2
+  }
+  },
+  
+  1200:{
+  slidesPerView:2,
+  grid:{
+  rows:2
+  }
+  }
+    }
+  
+  });
+  
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Customer feedback",
+    "settings": [
+      {
+        "type": "text",
+        "id": "feedback_heading",
+        "label": "Tiêu đề Feedback"
+      }, {
+        "type": "textarea",
+        "id": "feedback_description",
+        "label": "Mô tả Feedback"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feedback",
+        "name": "Feedback",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Customer logo"
+          }, {
+            "type": "textarea",
+            "id": "content",
+            "label": "Feedback content"
+          }, {
+            "type": "text",
+            "id": "author",
+            "label": "Customer name"
+          }, {
+            "type": "text",
+            "id": "role",
+            "label": "Customer role / brand"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 4,
+    "presets": [
+      {
+        "name": "Customer feedback"
+      }
+    ]
+  }
+{% endschema %}

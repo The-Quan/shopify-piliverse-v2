@@ -1,0 +1,233 @@
+<section class="faq-section">
+  <div class="faq-inner">
+    <!-- LEFT -->
+    <div class="faq-left">
+      {% if section.settings.title != blank %}
+        <h2 class="faq-title">{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT -->
+    <div class="faq-right">
+      {% for block in section.blocks %}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-question">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<style>
+    .faq-section {
+      background: #020414;
+      padding: 120px 20px;
+    }
+
+    .faq-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+    }
+
+    /* LEFT */
+    .faq-title {
+      font-size: 60px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* RIGHT */
+    .faq-item {
+      margin-bottom: 14px;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: linear-gradient(rgba(48, 39, 85, 0.8) 0%, rgba(10, 6, 34, 0.8) 100%);
+      color: rgb(223, 225, 244);
+      border: 0;
+      border-radius: 12px;
+      padding: 18px 22px;
+      font-size: 15px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      text-decoration: none;
+      transition: min-height 150ms cubic-bezier(0.4, 0, 0.2, 1)
+      , background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* ANSWER */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 18px 22px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .faq-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .faq-title {
+        font-size: 36px;
+      }
+    }
+
+
+    /*
+     ===============================
+     SCROLL ANIMATION (SAFE)
+     ================================
+  */
+    .faq-title,
+    .faq-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .js-animate .faq-section.is-prepare .faq-title,
+    .js-animate .faq-section.is-prepare .faq-item {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .js-animate .faq-section.is-animate .faq-title,
+    .js-animate .faq-section.is-animate .faq-item {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1.4s ease
+      , transform 1.4s ease;
+    }
+
+    .js-animate .faq-section.is-animate .faq-item:nth-child(1) {
+      transition-delay: 0.2s
+    }
+    .js-animate .faq-section.is-animate .faq-item:nth-child(2) {
+      transition-delay: 0.35s
+    }
+    .js-animate .faq-section.is-animate .faq-item:nth-child(3) {
+      transition-delay: 0.5s
+    }
+    .js-animate .faq-section.is-animate .faq-item:nth-child(4) {
+      transition-delay: 0.65s
+    }
+    .js-animate .faq-section.is-animate .faq-item:nth-child(5) {
+      transition-delay: 0.8s
+    }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.faq-item');
+
+    items.forEach((item) => {
+      const button = item.querySelector('.faq-question');
+      const content = item.querySelector('.faq-answer');
+
+      button.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // đóng tất cả
+        items.forEach((i) => {
+          i.classList.remove('active');
+          const c = i.querySelector('.faq-answer');
+          if (c) c.style.maxHeight = null;
+        });
+
+        // mở item
+        if (!isActive) {
+          item.classList.add('active');
+          if (content) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How does this service work?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "This is the answer content."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        },
+        {
+          "type": "faq"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

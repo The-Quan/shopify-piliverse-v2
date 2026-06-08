@@ -1,0 +1,1311 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-footer-{{ai_gen_id}} {
+    display: block;
+    background-color: {{ block.settings.background_color }};
+    width: 100%;
+  }
+
+  .ai-footer-container-{{ai_gen_id}} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    padding: {{ block.settings.top_padding }}px 20px 40px;
+  }
+
+  /* ================= MAIN LAYOUT ================= */
+
+  .ai-footer-main-{{ai_gen_id}} {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  /* ================= LOGO ================= */
+
+  .ai-footer-logo-column-{{ai_gen_id}} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-footer-logo-{{ai_gen_id}} {
+    max-width: 150px;
+  }
+
+  .ai-footer-logo-{{ai_gen_id}} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ================= CONTACT ================= */
+
+  .ai-footer-contact-{{ai_gen_id}} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-footer-contact-item-{{ai_gen_id}} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    color: {{ block.settings.link_color }};
+    font-size: 14px;        /* FIX CỨNG */
+    font-weight: 400;       /* FIX CỨNG */
+    line-height: 1.5;
+  }
+
+  .ai-footer-contact-icon-{{ai_gen_id}} {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ICON GRAPHIC */
+  .ai-footer-contact-icon-{{ai_gen_id}} img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* TEXT – CĂN THEO ICON */
+  .ai-footer-contact-item-{{ai_gen_id}} > span,
+  .ai-footer-contact-item-{{ai_gen_id}} > a {
+    display: block;
+    padding-top: 4px; /* KEY FIX – KHÔNG PHỤ THUỘC FONT */
+    line-height: 1.5;
+  }
+
+  .ai-footer-contact-item-{{ai_gen_id}} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+  }
+
+  .ai-footer-contact-item-{{ai_gen_id}} a:hover {
+    text-decoration: underline;
+  }
+
+  /* ================= SOCIAL ================= */
+
+  .ai-footer-social-{{ai_gen_id}} {
+    display: flex;
+    gap: 12px;
+  }
+
+  .ai-footer-social-link-{{ai_gen_id}} {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: {{ block.settings.social_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-footer-social-link-{{ai_gen_id}} svg {
+    width: 20px;
+    height: 20px;
+    fill: {{ block.settings.social_icon_color }};
+  }
+
+  /* ================= MENUS ================= */
+
+  .ai-footer-menu-column-{{ai_gen_id}} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-footer-menu-heading-{{ai_gen_id}} {
+    color: {{ block.settings.heading_color }};
+    font-size: 15px;   /* FIX CỨNG */
+    font-weight: 400;  /* FIX CỨNG */
+    margin: 0;
+  }
+
+  .ai-footer-menu-list-{{ai_gen_id}} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-footer-menu-link-{{ai_gen_id}} {
+    color: {{ block.settings.link_color }};
+    font-size: 14px;   /* FIX CỨNG */
+    font-weight: 400;  /* FIX CỨNG */
+    text-decoration: none;
+  }
+
+  /* ================= BOTTOM ================= */
+
+  .ai-footer-bottom-{{ai_gen_id}} {
+    border-top: 1px solid {{ block.settings.border_color }};
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ai-footer-copyright-{{ai_gen_id}} {
+    color: {{ block.settings.copyright_color }};
+    font-size: 12px; /* FIX CỨNG */
+    margin: 0;
+  }
+
+  .ai-footer-legal-{{ai_gen_id}} {
+    display: flex;
+    gap: 16px;
+  }
+
+  .ai-footer-legal-link-{{ai_gen_id}} {
+    color: {{ block.settings.copyright_color }};
+    font-size: 12px;
+    text-decoration: none;
+  }
+  
+.ai-footer-company-detail-{{ai_gen_id}} span,
+.ai-footer-company-detail-{{ai_gen_id}} span span {
+  color: #5f5e6f;
+}
+  /* ================= MOBILE ================= */
+
+  @media screen and (max-width: 749px) {
+    .ai-footer-main-{{ai_gen_id}} {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .ai-footer-contact-{{ai_gen_id}},
+    .ai-footer-social-{{ai_gen_id}} {
+      display: none;
+    }
+
+    .ai-footer-mobile-menus-{{ai_gen_id}} {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .ai-footer-mobile-contact-{{ai_gen_id}} {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ai-footer-bottom-{{ai_gen_id}} {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ai-footer-main-{{ai_gen_id}} > .ai-footer-menu-column-{{ai_gen_id}} {
+      display: none;
+    }
+
+      /* MOBILE SOCIAL – NẰM NGANG */
+  .ai-footer-mobile-social-{{ai_gen_id}} {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .ai-footer-mobile-contact-{{ai_gen_id}} .ai-footer-company-dropdown-{{ai_gen_id}} {
+    width: 100%;
+  }
+
+  .ai-footer-mobile-contact-{{ai_gen_id}} .ai-footer-company-summary-{{ai_gen_id}} {
+    width: 100%;
+  }
+
+  .ai-footer-mobile-contact-{{ai_gen_id}} .ai-footer-company-content-{{ai_gen_id}} {
+    margin-left: 36px;
+    padding-top: 12px;
+  }
+
+  .ai-footer-mobile-contact-{{ai_gen_id}} .ai-footer-company-arrow-{{ai_gen_id}} {
+    display: block;
+  }
+
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-footer-mobile-menus-{{ai_gen_id}},
+    .ai-footer-mobile-contact-{{ai_gen_id}},
+    .ai-footer-mobile-social-{{ai_gen_id}} {
+      display: none;
+    }
+  }
+
+  /* ================= COMPANY DROPDOWN ================= */
+
+.ai-footer-company-dropdown-{{ai_gen_id}} {
+  color: {{ block.settings.link_color }};
+}
+
+.ai-footer-company-summary-{{ai_gen_id}} {
+  width: 450px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+
+  color: {{ block.settings.link_color }};
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.ai-footer-company-content-{{ai_gen_id}} {
+  margin-left: 36px;
+  padding-top: 4px;
+  padding-left: 16px;
+  border-left: 1px solid {{ block.settings.link_color }};
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-footer-company-arrow-{{ai_gen_id}} {
+  color: {{ block.settings.link_color }};
+}
+
+.ai-footer-company-summary-{{ai_gen_id}}:hover > span:not(.ai-footer-contact-icon-{{ai_gen_id}}):not(.ai-footer-company-arrow-{{ai_gen_id}}) {
+  color: {{ block.settings.link_color }};
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ai-footer-company-summary-{{ai_gen_id}}::-webkit-details-marker {
+  display: none;
+}
+
+.ai-footer-company-summary-{{ai_gen_id}} > span:not(.ai-footer-contact-icon-{{ai_gen_id}}) {
+  display: block;
+  padding-top: 4px;
+}
+
+.ai-footer-company-arrow-{{ai_gen_id}} {
+  margin-left: auto;
+  padding-top: 4px;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.ai-footer-company-dropdown-{{ai_gen_id}}[open] .ai-footer-company-arrow-{{ai_gen_id}} {
+  transform: rotate(180deg);
+}
+
+.ai-footer-company-content-{{ai_gen_id}} {
+  margin-left: 36px;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-footer-company-detail-{{ai_gen_id}} {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  /*color: {{ block.settings.link_color }};*/
+  color: #5f5e6f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ai-footer-company-detail-{{ai_gen_id}} > span:not(.ai-footer-contact-icon-{{ai_gen_id}}) {
+  display: block;
+  padding-top: 4px;
+}
+
+{% endstyle %}
+
+<footer-block-{{ ai_gen_id }} class="ai-footer-{{ai_gen_id}}" {{ block.shopify_attributes }}>
+  <div class="ai-footer-container-{{ai_gen_id}}">
+    <div class="ai-footer-main-{{ai_gen_id}}">
+      <div class="ai-footer-logo-column-{{ai_gen_id}}">
+        {% if block.settings.logo %}
+          <div class="ai-footer-logo-{{ai_gen_id}}">
+            <img
+              src="{{ block.settings.logo | image_url: width: 300 }}"
+              alt="{{ shop.name }}"
+              loading="lazy"
+              width="{{ block.settings.logo.width }}"
+              height="{{ block.settings.logo.height }}"
+            >
+          </div>
+        {% endif %}
+
+        <div class="ai-footer-contact-{{ai_gen_id}}">
+          {% if block.settings.company_name != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}" open>
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_1 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_1 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+{% if block.settings.company_name_2 != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}">
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name_2 }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_2 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_2 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code_2 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code_2 }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+{% if block.settings.company_name_3 != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}">
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name_3 }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_3 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_3 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code_3 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code_3 }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+          {% if block.settings.phone != blank %}
+            <div class="ai-footer-contact-item-{{ai_gen_id}}">
+              {% if block.settings.icon_phone %}
+                <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+                  <img
+                    src="{{ block.settings.icon_phone | image_url: width: 32 }}"
+                    alt="Phone"
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                  >
+                </span>
+              {% endif %}
+              <a href="tel:{{ block.settings.phone | replace: ' ', '' }}">
+                {{ block.settings.phone }}
+              </a>
+            </div>
+          {% endif %}
+
+          {% if block.settings.email != blank %}
+            <div class="ai-footer-contact-item-{{ai_gen_id}}">
+              {% if block.settings.icon_email %}
+                <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+                  <img
+                    src="{{ block.settings.icon_email | image_url: width: 32 }}"
+                    alt="Email"
+                    loading="lazy"
+                    width="40"
+                    height="40"
+                  >
+                </span>
+              {% endif %}
+              <a href="mailto:{{ block.settings.email }}">
+                {{ block.settings.email }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ai-footer-social-{{ai_gen_id}}">
+          {% if block.settings.facebook_url != blank %}
+            <a
+              href="{{ block.settings.facebook_url }}"
+              class="ai-footer-social-link-{{ai_gen_id}}"
+              target="_blank"
+              rel="noopener"
+              aria-label="Facebook"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+          {% endif %}
+          {% if block.settings.instagram_url != blank %}
+            <a
+              href="{{ block.settings.instagram_url }}"
+              class="ai-footer-social-link-{{ai_gen_id}} mobile-hidden"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          {% endif %}
+          {% if block.settings.twitter_url != blank %}
+            <a
+              href="{{ block.settings.twitter_url }}"
+              class="ai-footer-social-link-{{ai_gen_id}} mobile-hidden"
+              target="_blank"
+              rel="noopener"
+              aria-label="Twitter"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+          {% endif %}
+          {% if block.settings.linkedin_url != blank %}
+            <a
+              href="{{ block.settings.linkedin_url }}"
+              class="ai-footer-social-link-{{ai_gen_id}}"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if block.settings.company_menu != blank %}
+        <div class="ai-footer-menu-column-{{ai_gen_id}}">
+          <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.company_heading }}</h3>
+          <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+            {% for link in linklists[block.settings.company_menu].links %}
+              <li>
+                <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if block.settings.works_menu != blank %}
+        <div class="ai-footer-menu-column-{{ai_gen_id}}">
+          <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.works_heading }}</h3>
+          <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+            {% for link in linklists[block.settings.works_menu].links %}
+              <li>
+                <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if block.settings.services_menu != blank %}
+        <div class="ai-footer-menu-column-{{ai_gen_id}}">
+          <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.services_heading }}</h3>
+          <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+            {% for link in linklists[block.settings.services_menu].links %}
+              <li>
+                <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="ai-footer-mobile-menus-{{ai_gen_id}}">
+        {% if block.settings.company_menu != blank %}
+          <div class="ai-footer-menu-column-{{ai_gen_id}}">
+            <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.company_heading }}</h3>
+            <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+              {% for link in linklists[block.settings.company_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if block.settings.works_menu != blank %}
+          <div class="ai-footer-menu-column-{{ai_gen_id}}">
+            <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.works_heading }}</h3>
+            <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+              {% for link in linklists[block.settings.works_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if block.settings.services_menu != blank %}
+          <div class="ai-footer-menu-column-{{ai_gen_id}}">
+            <h3 class="ai-footer-menu-heading-{{ai_gen_id}}">{{ block.settings.services_heading }}</h3>
+            <ul class="ai-footer-menu-list-{{ai_gen_id}}">
+              {% for link in linklists[block.settings.services_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="ai-footer-menu-link-{{ai_gen_id}}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-footer-mobile-contact-{{ai_gen_id}}">
+        {% if block.settings.company_name != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}" open>
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_1 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_1 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+{% if block.settings.company_name_2 != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}">
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name_2 }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_2 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_2 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code_2 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code_2 }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+{% if block.settings.company_name_3 != blank %}
+  <details class="ai-footer-company-dropdown-{{ai_gen_id}}">
+    <summary class="ai-footer-company-summary-{{ai_gen_id}}">
+      {% if block.settings.icon_company %}
+        <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+          <img
+            src="{{ block.settings.icon_company | image_url: width: 32 }}"
+            alt="Company"
+            loading="lazy"
+            width="40"
+            height="40"
+          >
+        </span>
+      {% endif %}
+
+      <span>{{ block.settings.company_name_3 }}</span>
+      <span class="ai-footer-company-arrow-{{ai_gen_id}}">⮟</span>
+    </summary>
+
+    <div class="ai-footer-company-content-{{ai_gen_id}}">
+      {% if block.settings.address_3 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_address %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_address | image_url: width: 32 }}"
+                alt="Address"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.address_3 }}</span>
+        </div>
+      {% endif %}
+
+      {% if block.settings.tax_code_3 != blank %}
+        <div class="ai-footer-company-detail-{{ai_gen_id}}">
+          {% if block.settings.icon_tax %}
+            <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+              <img
+                src="{{ block.settings.icon_tax | image_url: width: 32 }}"
+                alt="Tax"
+                loading="lazy"
+                width="40"
+                height="40"
+              >
+            </span>
+          {% endif %}
+          <span>{{ block.settings.tax_code_3 }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </details>
+{% endif %}
+
+
+        {% if block.settings.phone != blank %}
+          <div class="ai-footer-contact-item-{{ai_gen_id}}">
+            {% if block.settings.icon_phone %}
+              <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+                <img
+                  src="{{ block.settings.icon_phone | image_url: width: 32 }}"
+                  alt="Phone"
+                  loading="lazy"
+                  width="40"
+                  height="40"
+                >
+              </span>
+            {% endif %}
+            <a href="tel:{{ block.settings.phone | replace: ' ', '' }}">
+              {{ block.settings.phone }}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if block.settings.email != blank %}
+          <div class="ai-footer-contact-item-{{ai_gen_id}}">
+            {% if block.settings.icon_email %}
+              <span class="ai-footer-contact-icon-{{ai_gen_id}}">
+                <img
+                  src="{{ block.settings.icon_email | image_url: width: 32 }}"
+                  alt="Email"
+                  loading="lazy"
+                  width="40"
+                  height="40"
+                >
+              </span>
+            {% endif %}
+            <a href="mailto:{{ block.settings.email }}">
+              {{ block.settings.email }}
+            </a>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <div class="ai-footer-mobile-social-{{ai_gen_id}}">
+        {% if block.settings.facebook_url != blank %}
+          <a
+            href="{{ block.settings.facebook_url }}"
+            class="ai-footer-social-link-{{ai_gen_id}}"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.instagram_url != blank %}
+          <a
+            href="{{ block.settings.instagram_url }}"
+            class="ai-footer-social-link-{{ai_gen_id}}"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.twitter_url != blank %}
+          <a
+            href="{{ block.settings.twitter_url }}"
+            class="ai-footer-social-link-{{ai_gen_id}}"
+            target="_blank"
+            rel="noopener"
+            aria-label="Twitter"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.linkedin_url != blank %}
+          <a
+            href="{{ block.settings.linkedin_url }}"
+            class="ai-footer-social-link-{{ai_gen_id}}"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-footer-bottom-{{ai_gen_id}}">
+      <p class="ai-footer-copyright-{{ai_gen_id}}">{{ block.settings.copyright_text }}</p>
+      <div class="ai-footer-legal-{{ai_gen_id}}">
+        {% if block.settings.terms_url != blank %}
+          <a href="{{ block.settings.terms_url }}" class="ai-footer-legal-link-{{ai_gen_id}}">Terms of use</a>
+        {% endif %}
+        {% if block.settings.privacy_url != blank %}
+          <a href="{{ block.settings.privacy_url }}" class="ai-footer-legal-link-{{ai_gen_id}}">Privacy Policy</a>
+        {% endif %}
+        {% if block.settings.cookies_url != blank %}
+          <a href="{{ block.settings.cookies_url }}" class="ai-footer-legal-link-{{ai_gen_id}}">Cookies</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer-block-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FooterBlock{{ai_gen_id}} extends HTMLElement {
+      connectedCallback() {
+        const groups = [
+          this.querySelector('.ai-footer-contact-{{ai_gen_id}}'),
+          this.querySelector('.ai-footer-mobile-contact-{{ai_gen_id}}')
+        ];
+
+        groups.forEach((group) => {
+          if (!group) return;
+
+          const dropdowns = group.querySelectorAll('.ai-footer-company-dropdown-{{ai_gen_id}}');
+
+          dropdowns.forEach((dropdown) => {
+            dropdown.addEventListener('toggle', () => {
+              if (!dropdown.open) return;
+
+              dropdowns.forEach((otherDropdown) => {
+                if (otherDropdown !== dropdown) {
+                  otherDropdown.removeAttribute('open');
+                }
+              });
+            });
+          });
+        });
+      }
+    }
+
+    customElements.define('footer-block-{{ai_gen_id}}', FooterBlock{{ai_gen_id}});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "PiliVerse footer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 67
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Contact information"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company name",
+      "default": "PILI VERSE ONE MEMBER LIMITED LIABILITY COMPANY"
+    },
+    {
+      "type": "text",
+      "id": "address_1",
+      "label": "Address line 1",
+      "default": "123 Main Street"
+    },
+    {
+      "type": "text",
+      "id": "tax_code",
+      "label": "Tax code",
+      "default": "TAX: 0111297250"
+    },
+    {
+      "type": "text",
+      "id": "company_name_2",
+      "label": "Company name 2",
+      "default": "PILI VERSE ONE MEMBER LIMITED LIABILITY COMPANY"
+    },
+    {
+      "type": "text",
+      "id": "address_2",
+      "label": "Address line 2",
+      "default": "New York, NY 10001"
+    },
+    {
+      "type": "text",
+      "id": "tax_code_2",
+      "label": "Tax code 2",
+      "default": "TAX: 0111297250"
+    },
+    {
+      "type": "text",
+      "id": "company_name_3",
+      "label": "Company name 3",
+      "default": "PILI VERSE ONE MEMBER LIMITED LIABILITY COMPANY"
+    },
+    {
+      "type": "text",
+      "id": "address_3",
+      "label": "Address line 3",
+      "default": "New York, NY 10001"
+    },
+    {
+      "type": "text",
+      "id": "tax_code_3",
+      "label": "Tax code 3",
+      "default": "TAX: 0111297250"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "hello@piliverse.com"
+    },
+    {
+      "type": "header",
+      "content": "Social media"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn URL"
+    },
+    {
+      "type": "header",
+      "content": "Company menu"
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Heading",
+      "default": "Company"
+    },
+    {
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Works menu"
+    },
+    {
+      "type": "text",
+      "id": "works_heading",
+      "label": "Heading",
+      "default": "Works"
+    },
+    {
+      "type": "link_list",
+      "id": "works_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Services menu"
+    },
+    {
+      "type": "text",
+      "id": "services_heading",
+      "label": "Heading",
+      "default": "Services"
+    },
+    {
+      "type": "link_list",
+      "id": "services_menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Bottom section"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2024 PiliVerse. All rights reserved."
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Terms of use URL"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Privacy policy URL"
+    },
+    {
+      "type": "url",
+      "id": "cookies_url",
+      "label": "Cookies URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0A0B1A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#5E6077"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Copyright text",
+      "default": "#BABCD2"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#5E6077"
+    },
+    {
+      "type": "color",
+      "id": "social_bg_color",
+      "label": "Social button background",
+      "default": "#1A1B2E"
+    },
+    {
+      "type": "color",
+      "id": "social_bg_hover_color",
+      "label": "Social button hover",
+      "default": "#2A2B3E"
+    },
+    {
+      "type": "color",
+      "id": "social_icon_color",
+      "label": "Social icon",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_address",
+      "label": "Address icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_phone",
+      "label": "Phone icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_email",
+      "label": "Email icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_company",
+      "label": "Company icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_tax",
+      "label": "Tax code icon"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PiliVerse footer"
+    }
+  ]
+}
+{% endschema %}

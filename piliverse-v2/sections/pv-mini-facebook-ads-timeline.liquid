@@ -1,0 +1,882 @@
+{% assign timeline_colors = '#7c83ff,
+       #c084fc,
+       #7c83ff,
+       #c084fc,
+       #7c83ff,
+       #c084fc'
+  | split: ','
+%}
+
+<section class="pv-timeline">
+  <div class="pv-timeline-header">
+    <h2>
+      <span class="pv-animate-text">{{ section.settings.heading }}</span>
+    </h2>
+    <p>
+      <span class="pv-animate-text">{{ section.settings.description }}</span>
+    </p>
+  </div>
+
+  <div class="pv-timeline-wrapper">
+    <div class="pv-timeline-start">
+      <span class="pv-start-inner">{{ section.settings.start_label }}</span>
+    </div>
+
+    {% for block in section.blocks %}
+      {% assign current_index = forloop.index0 %}
+      {% assign prev_index = current_index | minus: 1 %}
+      {% assign is_odd = forloop.index | modulo: 2 %}
+
+      {% if is_odd == 1 %}
+        {% assign dot_color = '#ed66d0' %}
+      {% else %}
+        {% assign dot_color = '#b14ad6' %}
+      {% endif %}
+
+      {% assign prev_is_odd = prev_index | plus: 1 | modulo: 2 %}
+      {% if prev_is_odd == 1 %}
+        {% assign prev_color = '#ed66d0' %}
+      {% else %}
+        {% assign prev_color = '#b14ad6' %}
+      {% endif %}
+
+      {% assign is_even = forloop.index | modulo: 2 %}
+
+      <div
+        class="pv-timeline-item {% if is_even == 0 %}right{% else %}left{% endif %}"
+        style="--delay: {{ forloop.index0 | times: 0.15 }}s;"
+      >
+        <!-- CENTER LINE + DOT -->
+        <div class="pv-timeline-dot-wrap">
+          {% unless forloop.first %}
+            <span class="pv-line pv-line-top" style="background: {{ prev_color }};"></span>
+          {% endunless %}
+
+          <div class="pv-timeline-dot" style="border-color: {{ dot_color }}; color: {{ dot_color }};">
+            {{ forloop.index | prepend: '0' }}
+          </div>
+
+          {% unless forloop.last %}
+            <span class="pv-line pv-line-bottom" style="background: {{ dot_color }};"></span>
+          {% endunless %}
+        </div>
+
+        <!-- CONTENT -->
+        <div class="pv-timeline-content" style="color: {{ dot_color }};">
+          <div class="pv-content-top">
+            <h3>
+              <span class="pv-animate-text">{{ block.settings.title }}</span>
+            </h3>
+          </div>
+
+          <span class="pv-line-horizontal">
+            {% if block.settings.icon %}
+              <span class="pv-line-icon">
+                <span class="pv-line-icon-inner">
+                  <img
+                    src="{{ block.settings.icon | image_url: width: 80 }}"
+                    alt=""
+                    loading="lazy"
+                  >
+                </span>
+              </span>
+            {% endif %}
+          </span>
+          <div class="pv-content-bottom">
+            <ul class="pv-step-list">
+              {% if block.settings.desc_1 != blank %}
+                <li>
+                  <span class="pv-animate-text">{{ block.settings.desc_1 }}</span>
+                </li>
+              {% endif %}
+              {% if block.settings.desc_2 != blank %}
+                <li>
+                  <span class="pv-animate-text">{{ block.settings.desc_2 }}</span>
+                </li>
+              {% endif %}
+              {% if block.settings.desc_3 != blank %}
+                <li>
+                  <span class="pv-animate-text">{{ block.settings.desc_3 }}</span>
+                </li>
+              {% endif %}
+
+              {% if block.settings.desc_4 != blank %}
+                <li>
+                  <span class="pv-animate-text">{{ block.settings.desc_4 }}</span>
+                </li>
+              {% endif %}
+
+              {% if block.settings.desc_5 != blank %}
+                <li>
+                  <span class="pv-animate-text">{{ block.settings.desc_5 }}</span>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="pv-timeline-finish">
+      <span class="pv-finish-inner">{{ section.settings.finish_label }}</span>
+    </div>
+  </div>
+</section>
+<style>
+    /*
+
+     =========================
+     BASE
+     =========================
+  */
+    .pv-timeline {
+      padding: 50px 20px;
+      background: #010314;
+      color: #ffffff;
+    }
+
+    .pv-timeline-header {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 80px;
+    }
+
+    .pv-timeline-header h2 {
+      font-size: 56px;
+      margin-bottom: 14px;
+    }
+
+    .pv-timeline-header p {
+      color: #d1d5db;
+      font-size: 24px;
+    }
+
+
+    /*
+
+     =========================
+     WRAPPER
+     =========================
+  */
+    .pv-timeline-wrapper {
+      position: relative;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+
+    /*
+
+     =========================
+     START / FINISH
+     =========================
+  */
+    .pv-timeline-start,
+    .pv-timeline-finish {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      z-index: 5;
+    }
+
+    .pv-timeline-start {
+      top: -40px;
+    }
+
+    .pv-timeline-finish {
+      bottom: -40px;
+    }
+
+
+    /*
+
+     =========================
+     ITEM
+     =========================
+  */
+    .pv-timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 30px 40px;
+    }
+
+    .pv-timeline-item.left {
+      left: 0;
+      text-align: right;
+      padding-right: 90px;
+    }
+
+    .pv-timeline-item.right {
+      left: 50%;
+      text-align: left;
+      padding-left: 90px;
+    }
+
+
+    /*
+
+     =========================
+     CENTER LINE + DOT
+     =========================
+  */
+    .pv-timeline-dot-wrap {
+      position: absolute;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .pv-timeline-item.left .pv-timeline-dot-wrap {
+      right: -2px;
+    }
+
+    .pv-timeline-item.right .pv-timeline-dot-wrap {
+      left: -2px;
+    }
+
+    .pv-line {
+      position: absolute;
+      left: 0;
+      width: 4px;
+      border-radius: 4px;
+    }
+
+    .pv-line-top {
+      top: 0;
+      height: 30px;
+    }
+
+    .pv-line-bottom {
+      top: 82px;
+      height: calc(100% - 82px);
+    }
+
+    .pv-timeline-dot {
+      position: absolute;
+      top: 30px;
+      width: 52px;
+      height: 52px;
+      background: #010314;
+      border: 4px solid;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      z-index: 3;
+    }
+
+    .pv-timeline-item.left .pv-timeline-dot {
+      right: -26px;
+    }
+
+    .pv-timeline-item.right .pv-timeline-dot {
+      left: -26px;
+    }
+
+
+    /*
+
+     =========================
+     CONTENT
+     =========================
+  */
+    .pv-timeline-content {
+      position: relative;
+      padding: 10px 0;
+    }
+
+    .pv-content-top h3 {
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: currentColor;
+    }
+
+
+    /*
+
+     =========================
+     LIST (DESC)
+     =========================
+  */
+    .pv-content-bottom ul {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pv-content-bottom li {
+      position: relative;
+      margin-bottom: 10px;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    /* RIGHT ITEM → bullet bên trái */
+    .pv-timeline-item.right .pv-content-bottom li {
+      padding-left: 18px;
+      padding-right: 0;
+      text-align: left;
+    }
+
+    .pv-timeline-item.right .pv-content-bottom li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+    }
+
+    /* LEFT ITEM → bullet bên phải */
+    .pv-timeline-item.left .pv-content-bottom li {
+      padding-right: 18px;
+      padding-left: 0;
+      text-align: right;
+    }
+
+    .pv-timeline-item.left .pv-content-bottom li::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+    }
+
+
+    /*
+
+     =========================
+     HORIZONTAL LINE + ARROW
+     =========================
+  */
+    .pv-line-horizontal {
+      position: relative;
+      display: block;
+      width: 100%;
+
+      border-top: 2px dashed currentColor;
+    }
+    .pv-line-horizontal::before {
+      content: none;
+    }
+    .pv-timeline-item.right .pv-line-horizontal::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: -2px;
+      border-left: 8px solid currentColor;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .pv-timeline-item.left .pv-line-horizontal::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: -2px;
+      border-right: 8px solid currentColor;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .pv-line-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      background: #010314;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      overflow: hidden;
+    }
+    .pv-line-icon-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.6) rotate(-90deg);
+      opacity: 0;
+      transition: opacity 0.6s ease
+      , transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pv-timeline.is-animate .pv-line-icon-inner {
+      transform: scale(1) rotate(0);
+      opacity: 1;
+    }
+    .pv-line-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+
+    .pv-timeline-item.right .pv-line-icon {
+      right: -46px;
+    }
+
+    .pv-timeline-item.left .pv-line-icon {
+      left: -46px;
+    }
+
+
+    /*
+
+     =========================
+     RESPONSIVE ≤ 952px
+     =========================
+  */
+    @media (max-width: 952px) {
+      /* STEP RIGHT → icon bên TRÁI → mũi tên trỏ TRÁI */
+      .pv-timeline-header h2 {
+        font-size: 24px;
+      }
+      .pv-timeline-header p {
+        font-size: 14px;
+      }
+      .pv-timeline-item.left .pv-line-icon {
+        left: auto !important;
+        right: -72px !important;
+      }
+
+      .pv-timeline-item.right .pv-line-icon {
+        right: auto !important;
+        left: -72px !important;
+      }
+      /* RESET DESKTOP */
+      .pv-timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding: 28px 20px;
+      }
+      .pv-timeline-item.left .pv-content-bottom {
+        padding-right: 10px;
+        /* đẩy nội dung tránh icon */
+      }
+      /* STEP LẺ → LINE TRÁI */
+      .pv-timeline-item.left {
+        text-align: left;
+        padding-left: 80px;
+      }
+
+      .pv-timeline-item.left .pv-timeline-dot-wrap {
+        left: 32px;
+        right: auto;
+      }
+
+      .pv-timeline-item.left .pv-timeline-dot {
+        left: -26px;
+        right: auto;
+      }
+
+      /* STEP CHẴN → LINE PHẢI */
+      .pv-timeline-item.right {
+        text-align: left;
+        padding-right: 80px;
+      }
+
+      .pv-timeline-item.right .pv-timeline-dot-wrap {
+        right: 32px;
+        left: auto;
+      }
+
+      .pv-timeline-item.right .pv-timeline-dot {
+        right: -26px;
+        left: auto;
+      }
+
+      /* CONTENT */
+      .pv-timeline-content {
+        max-width: 90%;
+      }
+
+      .pv-content-top h3 {
+        font-size: 16px;
+      }
+
+      .pv-content-bottom li {
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      /* HORIZONTAL LINE */
+      .pv-line-horizontal {
+        max-width: 90%;
+      }
+
+      /* ICON */
+      .pv-line-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .pv-line-icon img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+
+    /*
+
+     =========================
+     MOBILE ZIG-ZAG ≤ 768px
+     =========================
+  */
+    @media (max-width: 768px) {
+
+      .pv-timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding: 32px 16px;
+      }
+
+      /* ===== STEP LẺ (LEFT LINE – ICON RIGHT) ===== */
+      .pv-timeline-item.left {
+        padding-left: 64px;
+        padding-right: 40px !important;
+        /* chừa chỗ cho icon */
+        text-align: left;
+      }
+
+      .pv-timeline-item.left .pv-timeline-dot-wrap {
+        left: 24px;
+      }
+
+      .pv-timeline-item.left .pv-timeline-dot {
+        left: -26px;
+      }
+
+      .pv-timeline-item.left .pv-line-icon {
+        right: -72px;
+        left: auto;
+      }
+
+      /* ===== STEP CHẴN (RIGHT LINE – ICON LEFT) ===== */
+      .pv-timeline-item.right {
+        padding-left: 80px;
+        /* chừa chỗ cho icon */
+        padding-right: 64px;
+        text-align: left;
+      }
+
+      .pv-timeline-item.right .pv-timeline-dot-wrap {
+        right: 24px;
+        left: auto;
+      }
+
+      .pv-timeline-item.right .pv-timeline-dot {
+        right: -26px;
+        left: auto;
+      }
+
+      .pv-timeline-item.right .pv-line-icon {
+        left: -72px;
+        right: auto;
+      }
+
+      /* ===== CONTENT ===== */
+      .pv-timeline-content {
+        width: 100%;
+      }
+
+      .pv-content-top h3 {
+        font-size: 15px;
+      }
+
+      .pv-content-bottom li {
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      /* ===== ICON ===== */
+      .pv-line-icon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .pv-line-icon img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ===== LINE ===== */
+      .pv-line-horizontal {
+        width: 100%;
+      }
+
+      .pv-timeline-item.left .pv-line-horizontal::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        right: -2px;
+        border-left: 8px solid currentColor;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+      }
+
+
+      .pv-timeline-item.right .pv-line-horizontal::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: -2px;
+        border-right: 8px solid currentColor;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+      }
+    }
+
+    .pv-animate-text {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 1.5s ease
+      , transform 1.5s ease;
+    }
+
+    .pv-timeline.is-animate .pv-animate-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pv-timeline.is-animate .pv-timeline-item,
+    .pv-timeline.is-animate .pv-timeline-header,
+    .pv-timeline.is-animate .pv-timeline-start,
+    .pv-timeline.is-animate .pv-timeline-finish {
+      opacity: 1;
+    }
+
+
+    .pv-timeline.is-animate .pv-timeline-item,
+    .pv-timeline.is-animate .pv-timeline-header,
+    .pv-timeline.is-animate .pv-timeline-start,
+    .pv-timeline.is-animate .pv-timeline-finish {
+      opacity: 1;
+    }
+    .pv-line {
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 1.5s ease;
+    }
+
+    .pv-timeline.is-animate .pv-line {
+      transform: scaleY(1);
+    }
+    .pv-line-icon-inner {
+      opacity: 0;
+      transform: rotate(-360deg);
+      transition: opacity 0.5s ease
+      , transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pv-timeline.is-animate .pv-line-icon-inner {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+
+    .pv-start-inner,
+    .pv-finish-inner {
+      opacity: 0;
+      transform: scale(1.4);
+      transition: opacity 0.6s ease
+      , transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pv-timeline.is-animate .pv-start-inner,
+    .pv-timeline.is-animate .pv-finish-inner {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .pv-line-horizontal {
+      position: relative;
+      height: 2px;
+      overflow: visible;
+    }
+
+    /* LINE THỰC SỰ */
+    .pv-line-horizontal::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-image: repeating-linear-gradient(to right, currentColor 0 6px, transparent 6px 12px);
+      transform: scaleX(0);
+      transition: transform 1.5s ease;
+    }
+    .pv-timeline-item.right .pv-line-horizontal::before {
+      transform-origin: left;
+    }
+    .pv-timeline-item.left .pv-line-horizontal::before {
+      transform-origin: right;
+    }
+    /* ===== TRẠNG THÁI MẶC ĐỊNH (KHÔNG ANIMATE) ===== */
+    .pv-timeline-item,
+    .pv-timeline-header,
+    .pv-timeline-start,
+    .pv-timeline-finish {
+      opacity: 1;
+    }
+</style>
+
+{% schema %}
+{
+  "name": "PV – Mini FB Ads Timeline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Tiêu đề",
+      "default": "Quy trình triển khai dịch vụ Mini Facebook Ads"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Mô tả",
+      "default": "Pili Verse đồng hành cùng bạn từ chiến lược – nội dung – triển khai – tối ưu – báo cáo."
+    },
+    {
+      "type": "text",
+      "id": "start_label",
+      "label": "START",
+      "default": "START"
+    },
+    {
+      "type": "text",
+      "id": "finish_label",
+      "label": "FINISH",
+      "default": "FINISH"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Bước",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon cuối mũi tên"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề bước",
+          "default": "Tiêu đề bước"
+        },
+        {
+          "type": "text",
+          "id": "desc_1",
+          "label": "Mô tả dòng 1",
+          "default": "Tiếp nhận thông tin sản phẩm/dịch vụ, mục tiêu và ngân sách"
+        },
+        {
+          "type": "text",
+          "id": "desc_2",
+          "label": "Mô tả dòng 2",
+          "default": "Phân tích khách hàng mục tiêu và nhu cầu thực tế"
+        },
+        {
+          "type": "text",
+          "id": "desc_3",
+          "label": "Mô tả dòng 3",
+          "default": "Tư vấn chiến lược Facebook Ads phù hợp mô hình kinh doanh"
+        },
+        {
+          "type": "text",
+          "id": "desc_4",
+          "label": "Mô tả dòng 4",
+          "default": "Tư vấn chiến lược Facebook Ads phù hợp mô hình kinh doanh"
+        },
+        {
+          "type": "text",
+          "id": "desc_5",
+          "label": "Mô tả dòng 5",
+          "default": "Tư vấn chiến lược Facebook Ads phù hợp mô hình kinh doanh"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "PV – Mini Facebook Ads Timeline",
+      "blocks": [
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        },
+        {
+          "type": "step"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<script>
+  (() => {
+    const section = document.querySelector('.pv-timeline');
+    if (!section) return;
+
+    let lastScrollY = window.scrollY;
+    let scrollingDown = true;
+
+    window.addEventListener('scroll', () => {
+      scrollingDown = window.scrollY > lastScrollY;
+      lastScrollY = window.scrollY;
+    });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // CHỈ animate khi:
+        // 1. Đang cuộn xuống
+        // 2. Section bắt đầu đi vào viewport từ trên
+        if (entry.isIntersecting && scrollingDown && entry.boundingClientRect.top > 0) {
+          section.classList.add('is-animate');
+        }
+
+        // Reset khi cuộn ngược lên trên section
+        if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+          section.classList.remove('is-animate');
+        }
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(section);
+  })();
+</script>
